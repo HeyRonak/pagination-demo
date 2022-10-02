@@ -7,7 +7,7 @@ import com.example.paginationdemo.Actvities.Services.Models.PostResp
 import com.example.paginationdemo.databinding.ProgressbarBinding
 import com.example.paginationdemo.databinding.SingleItemBinding
 
-class ItemAdapter(var activity: BaseActivity, var list: ArrayList<PostResp.PostRespItem?>) :
+class ItemAdapter(var list: ArrayList<PostResp.PostRespItem?>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val Loading = 0
@@ -46,7 +46,7 @@ class ItemAdapter(var activity: BaseActivity, var list: ArrayList<PostResp.PostR
         if (getItemViewType(position) == Item) {
             (holder as MyViewHolder)
 
-            holder.binding.wallic.text = list[position]?.id.toString()
+            holder.binding.tvNumber.text = list[position]?.id.toString()
 
         }
         else {
@@ -70,9 +70,9 @@ class ItemAdapter(var activity: BaseActivity, var list: ArrayList<PostResp.PostR
 
     }
 
-    fun add(photos: PostResp?) {
-        if (photos != null) {
-            list.addAll(photos)
+    fun add(post: PostResp?) {
+        if (post != null) {
+            list.addAll(post)
         };
         notifyDataSetChanged()
     }

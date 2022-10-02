@@ -3,6 +3,7 @@ package com.example.paginationdemo.Actvities
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.paginationdemo.Actvities.Services.Models.PostResp
 import com.example.paginationdemo.Actvities.Services.RetrofitService
@@ -12,7 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
     private var page: Int = 0
     private var isLoading: Boolean = false
@@ -25,7 +26,7 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = ItemAdapter(activity, ArrayList())
+        adapter = ItemAdapter(ArrayList())
 
         val layoutManager = LinearLayoutManager(this)
 
@@ -36,7 +37,7 @@ class MainActivity : BaseActivity() {
 
             override fun loadMoreItems() {
                 isLoading = true
-                _apiCall()
+                _callPostApi()
             }
 
             override fun isLoading(): Boolean {
@@ -49,11 +50,11 @@ class MainActivity : BaseActivity() {
 
         })
 
-        _apiCall()
+        _callPostApi()
 
     }
 
-    fun _apiCall() {
+    fun _callPostApi() {
 
         page++
         val client = RetrofitService.getInstance()
@@ -75,7 +76,7 @@ class MainActivity : BaseActivity() {
                             }
                         }
 
-                        var list = response.body()
+                        val list = response.body()
                         if (list?.size!! < 20) {
                             isLastpage = true
                         }
